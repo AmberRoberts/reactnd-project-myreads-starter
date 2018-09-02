@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Book from './Book.js'
-
+import { Link } from 'react-router-dom'
 class BookShelf extends Component {
   render() {
     return (
@@ -15,9 +15,7 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
           <li>
-          </li>
           <Book />
-          <li>
           </li>
           </ol>
         </div>
@@ -27,9 +25,7 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             <li>
-            </li>
-
-            <li>
+            <Book />
             </li>
           </ol>
         </div>
@@ -39,10 +35,7 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             <li>
-            </li>
-            <li>
-            </li>
-            <li>
+            <Book />
             </li>
           </ol>
         </div>
@@ -50,7 +43,7 @@ class BookShelf extends Component {
     </div>
   </div>
   <div className="open-search">
-    <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+  <Link to="/search">SearchPage /></Link>
   </div>
 </div>
 );
