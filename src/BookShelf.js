@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Book from './Book.js'
 import { Link } from 'react-router-dom'
 class BookShelf extends Component {
+
   render() {
     return (
   <div className="list-books">
@@ -16,7 +17,9 @@ class BookShelf extends Component {
           <ol className="books-grid">
           { /* Filter to select books for this specific shelf, then map to create a new array to display here */ }
           {this.props.books.filter(book => book.shelf === "currentlyReading").map(book => (
-            <li><Book /></li>
+            <li key={book.id}>
+            <Book book={book} />
+            </li>
           ))}
           </ol>
         </div>
@@ -26,7 +29,9 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
           {this.props.books.filter(book => book.shelf === "currentlyReading").map(book => (
-            <li><Book /></li>
+            <li key={book.id}>
+            <Book book={book} />
+            </li>
           ))}
           </ol>
         </div>
@@ -36,7 +41,9 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
           {this.props.books.filter(book => book.shelf === "currentlyReading").map(book => (
-            <li><Book /></li>
+            <li key={book.id}>
+            <Book book={book} />
+            </li>
           ))}
           </ol>
         </div>

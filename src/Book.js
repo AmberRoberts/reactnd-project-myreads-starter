@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import BookShelf from './BookShelf.js'
 
 class Book extends Component {
+
   render() {
     return (
       <div className="book">
@@ -17,8 +18,8 @@ class Book extends Component {
             </select>
           </div>
         </div>
-        <div className="book-title"></div>
-        <div className="book-authors"></div>
+        <div className="book-title">{this.props.book.title}</div>
+        <div className="book-authors">{this.props.book.authors}</div>
       </div>
     );
   }
