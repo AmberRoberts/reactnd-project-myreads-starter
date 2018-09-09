@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import escapeRegExp from 'escape-string-regexp'
 import Book from "./Book"
 import * as BooksAPI from "./BooksAPI"
 
@@ -15,13 +16,18 @@ class SearchPage extends React.Component {
   updateQuery = (query) => {
   this.setState({ query });
   console.log(query)
+  this.searchResults(query);
 }
 
 // the query state uses the search method to fetch the books and create an array of search results
-searchResults =(query) => {
+searchResults = (query) => {
+  if (query) {
   BooksAPI.search(query).then((searchResults) => {
     this.setState({ searchResults })
 })
+} else {
+  console.log("no results")
+}
 }
   render() {
 
