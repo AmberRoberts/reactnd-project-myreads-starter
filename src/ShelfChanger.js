@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import Book from './Book.js'
-import BookShelf from './BookShelf.js'
+import Book from './Book'
+import BookShelf from './BookShelf'
+import BookCollection from './BookCollection'
+import * as BooksAPI from "./BooksAPI"
 
 class ShelfChanger extends Component {
 
-ShelfChanger = (e) => {
-  let shelf = e.target.value;
-
-  this.setState({ shelf }, () => {
-    this.props.onChangeShelf(this.props.book, this.props.shelf)
-  })
+ShelfChanger = (book, shelf) => {
+  BooksAPI.update(book, shelf);
   }
 
   render() {
@@ -18,4 +16,5 @@ ShelfChanger = (e) => {
 );
 }
 }
+
 export default ShelfChanger

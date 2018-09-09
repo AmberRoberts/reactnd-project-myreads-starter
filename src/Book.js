@@ -3,19 +3,19 @@ import BookShelf from "./BookShelf.js";
 import * as BooksAPI from "./BooksAPI";
 
 class Book extends Component {
+
   render() {
     return (
       <div className="book">
         <div className="book-top">
           <div
             className="book-cover"
-            style={{ width: 128, height: 192, backgroundImage: 'url("")' }}
+            style={{ width: 128, height: 192, backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")` }}
           />
           <div className="book-shelf-changer">
-            <select
-              onChange={e =>
-                this.props.moveBook(this.props.book, e.target.value)
-              }
+            <select onChange={(e) =>
+              this.props.ShelfChanger(this.props.book, e.target.value)
+            }
             >
               <option value="move" disabled>
                 Move to...

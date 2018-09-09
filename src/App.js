@@ -1,9 +1,9 @@
 import React, { Componment } from "react";
 import { Route, Link } from "react-router-dom";
-import SearchPage from "./SearchPage.js";
-import Book from "./Book.js";
+import SearchPage from "./SearchPage";
+import Book from "./Book";
 import * as BooksAPI from "./BooksAPI";
-import BookCollection from "./BookCollection.js";
+import BookCollection from "./BookCollection";
 import "./App.css";
 
 /* TODO: change shelf via arrow function and this.setState & filter/map? */
@@ -22,11 +22,12 @@ class BooksApp extends React.Component {
   }
 
   // handles the bookshelf changer in selection menu
-  moveBook(book, shelf) {
-    BooksAPI.update(book, shelf).then;
-    BooksAPI.getAll().then(books => {
-      this.setState({ books });
-    });
+// moveBook = (book, shelf) => {
+//   BooksAPI.update(book, shelf);
+// }
+
+ShelfChanger = (book, shelf) => {
+  BooksAPI.update(book, shelf);
   }
 
   // renders info on the page
@@ -37,7 +38,8 @@ class BooksApp extends React.Component {
         <Route
           exact
           path="/"
-          render={() => <BookCollection books={this.state.books} />}
+          render={() => <BookCollection books={this.state.books}
+          ShelfChanger={this.ShelfChanger}/>}
         />
         {/* Or render the search page for /search */}
         <Route path="/search" render={() => <SearchPage />} />

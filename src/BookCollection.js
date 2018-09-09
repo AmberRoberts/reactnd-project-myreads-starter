@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import BookShelf from "./BookShelf.js";
-import Book from "./Book.js";
-import ShelfChanger from "./ShelfChanger.js";
+import BookShelf from "./BookShelf";
+import Book from "./Book";
 import { Link } from "react-router-dom";
 
 /* this component gives each bookshelf its individual info including name, and tells the bookshelf.js .filter/.map which shelves each book should be shelved on (via shelve) */
@@ -19,21 +18,21 @@ class BookCollection extends Component {
               shelfName="Currenly Reading"
               shelve="currentlyReading"
               books={this.props.books}
-              moveBook={this.props.moveBook}
+              ShelfChanger={this.props.ShelfChanger}
             />
 
             <BookShelf
               shelfName="Want to Read"
               shelve="wantToRead"
               books={this.props.books}
-              moveBook={this.props.moveBook}
+              ShelfChanger={this.props.ShelfChanger}
             />
 
             <BookShelf
               shelfName="Read"
               shelve="read"
               books={this.props.books}
-              moveBook={this.props.moveBook}
+              ShelfChanger={this.props.ShelfChanger}
             />
           </div>
         </div>

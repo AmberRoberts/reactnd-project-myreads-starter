@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Book from "./Book.js";
+import Book from "./Book";
 import { Link } from "react-router-dom";
-import BookCollection from "./BookCollection.js";
+import BookCollection from "./BookCollection";
 
 /* This component sorts books into the proper shelves via .filter and .map, using this.props.shelve. It also makes use of the moveBook function to change the shelf based on the selection menu. */
 
