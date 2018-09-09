@@ -1,19 +1,32 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Book from "./Book"
+import * as BooksAPI from "./BooksAPI"
 
 class SearchPage extends React.Component {
+
+// state for query in search field, set an array to hold search results
   state = {
-    query: ''
+    query: '',
+    searchResults: []
   }
 
+// when text is typed in search field, state updates
   updateQuery = (query) => {
   this.setState({ query });
   console.log(query)
 }
 
+// the query state uses the search method to fetch the books and create an array of search results
+searchResults =(query) => {
+  BooksAPI.search(query).then((searchResults) => {
+    this.setState({ searchResults })
+})
+}
   render() {
 
-    const {query} = this.state
+    const {query, searchResults} = this.state
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -35,7 +48,15 @@ class SearchPage extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid" />
+          <ol className="books-grid">
+          <h2>{this.state.query}</h2>
+{/* Filter BooksAPI to display books that match the search results from searchResults array */}
+          {searchResults.map(searchResults => (
+            <li key={searchResults.id}>
+            <Book book={searchResults} />
+            </li>
+          ))}
+          </ol>
         </div>
       </div>
     );
