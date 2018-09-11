@@ -1,37 +1,46 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import escapeRegExp from 'escape-string-regexp'
-import Book from "./Book"
-import * as BooksAPI from "./BooksAPI"
+import escapeRegExp from "escape-string-regexp";
+import Book from "./Book";
+import * as BooksAPI from "./BooksAPI";
 
 class SearchPage extends React.Component {
-
-// state for query in search field, set an array to hold search results
+  // state for query in search field, set an array to hold search results
   state = {
-    query: '',
+    query: "",
     searchResults: []
-  }
+  };
 
-// when text is typed in search field, state updates
-  updateQuery = (query) => {
-  this.setState({ query });
-  console.log(query)
-  this.searchResults(query);
-}
+  // when text is typed in search field, state updates
+  updateQuery = query => {
+    this.setState({ query });
+    console.log(query);
+    this.searchResults(query);
+  };
 
-// the query state uses the search method to fetch the books and create an array of search results
-searchResults = (query) => {
-  if (query) {
-  BooksAPI.search(query).then((searchResults) => {
-    this.setState({ searchResults })
-})
-} else {
-  console.log("no results")
-}
-}
+  // the query state uses the search method to fetch the books and create an array of search results
+  // TODO: add to README https://survivejs.com/webpack/appendices/searching-with-react/
+
+  // use ternary here if there are search results, map. if no search results, say "no results"?
+
+  searchResults = query => {
+    if (query) {
+      BooksAPI.search(query).then(searchResults => {
+        {
+          /* if there's an error, doSomething! */
+        }
+        if (searchResults.error) {
+          this.setState({ searchResults: [] });
+          console.log('No results');
+        } else {
+          this.setState({ searchResults });
+        }
+      });
+    }
+  };
+
   render() {
-
-    const {query, searchResults} = this.state
+    const { query, searchResults } = this.state;
 
     return (
       <div className="search-books">
@@ -48,20 +57,23 @@ searchResults = (query) => {
             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
             you don't find a specific author or title. Every search is limited by search terms.
           */}
-            <input type="text" placeholder="Search by title or author"
-            value={query}
-            onChange = {(e) => this.updateQuery(e.target.value)}/>
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={query}
+              onChange={e => this.updateQuery(e.target.value)}
+            />
           </div>
         </div>
         <div className="search-books-results">
+          <h2>You searched for: {this.state.query}</h2>
           <ol className="books-grid">
-          <h2>{this.state.query}</h2>
-{/* Filter BooksAPI to display books that match the search results from searchResults array */}
-          {searchResults.map(searchResults => (
-            <li key={searchResults.id}>
-            <Book book={searchResults} />
-            </li>
-          ))}
+            {/* Filter BooksAPI to display books that match the search results from searchResults array */}
+            {searchResults.map(searchResults => (
+              <li key={searchResults.id}>
+                <Book book={searchResults} />
+              </li>
+            ))}
           </ol>
         </div>
       </div>
