@@ -3,9 +3,10 @@ import BookShelf from "./BookShelf";
 import Book from "./Book";
 import { Link } from "react-router-dom";
 
-/* this component gives each bookshelf its individual info including name, and tells the bookshelf.js .filter/.map which shelves each book should be shelved on (via shelve) */
+/* this component gives each bookshelf its individual info including shelf name, display info, and current books */
 
 class BookCollection extends Component {
+  
   render() {
     return (
       <div className="list-books">
@@ -16,28 +17,29 @@ class BookCollection extends Component {
           <div>
             <BookShelf
               shelfName="Currenly Reading"
-              shelve="currentlyReading"
+              shelf="currentlyReading"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
             />
 
             <BookShelf
               shelfName="Want to Read"
-              shelve="wantToRead"
+              shelf="wantToRead"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
             />
 
             <BookShelf
               shelfName="Read"
-              shelve="read"
+              shelf="read"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
             />
+
           </div>
         </div>
         <div className="open-search">
-          <Link to="search">Add a book</Link>
+          <Link to="/search">Add a book</Link>
         </div>
       </div>
     );

@@ -76,7 +76,8 @@ class SearchPage extends React.Component {
             {/* Filter BooksAPI to display books that match the search results from searchResults array */}
             {searchResults.map(searchResults => (
               <li key={searchResults.id}>
-                <Book book={searchResults} />
+                <Book book={searchResults}
+                 />
               </li>
             ))}
           </ol>

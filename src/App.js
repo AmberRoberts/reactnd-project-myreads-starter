@@ -6,7 +6,10 @@ import * as BooksAPI from "./BooksAPI";
 import BookCollection from "./BookCollection";
 import "./App.css";
 
-/* TODO: change shelf via arrow function and this.setState & filter/map? */
+// TODO: README
+// TODO: Thumbnail error
+// TODO: Refresh on shelf change
+// TODO: Search page isn't showing the right shelf on selection
 // TODO: reference: https://medium.freecodecamp.org/learn-react-js-in-5-minutes-526472d292f4
 
 class BooksApp extends React.Component {
@@ -21,15 +24,6 @@ class BooksApp extends React.Component {
     });
   }
 
-  // handles the bookshelf changer in selection menu
-// moveBook = (book, shelf) => {
-//   BooksAPI.update(book, shelf);
-// }
-
-ShelfChanger = (book, shelf) => {
-  BooksAPI.update(book, shelf);
-  }
-
   // renders info on the page
   render() {
     return (
@@ -39,7 +33,7 @@ ShelfChanger = (book, shelf) => {
           exact
           path="/"
           render={() => <BookCollection books={this.state.books}
-          ShelfChanger={this.ShelfChanger}/>}
+          />}
         />
         {/* Or render the search page for /search */}
         <Route path="/search" render={() => <SearchPage />} />

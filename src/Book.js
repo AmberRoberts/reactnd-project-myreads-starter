@@ -4,6 +4,17 @@ import * as BooksAPI from "./BooksAPI";
 
 class Book extends Component {
 
+// Handling events reference here: https://reactjs.org/docs/handling-events.html
+
+// handles the bookshelf changer in selection menu
+// TODO: why won't it automatically refresh?
+
+ShelfChanger = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+        .then(() => BooksAPI.getAll())
+        .then(books => this.setState({ books }))
+  }
+
   render() {
     return (
       <div className="book">
@@ -13,9 +24,11 @@ class Book extends Component {
             style={{ width: 128, height: 192, backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")` }}
           />
           <div className="book-shelf-changer">
-            <select onChange={(e) =>
-              this.props.ShelfChanger(this.props.book, e.target.value)
+            <select
+            onChange={(e) =>
+            this.ShelfChanger(this.props.book, e.target.value)
             }
+            value={this.props.book.shelf}
             >
               <option value="move" disabled>
                 Move to...
@@ -35,19 +48,3 @@ class Book extends Component {
 }
 
 export default Book;
-
-// TODO: these things
-/*
-
-  // TODO: modify state with setState
-  state = {
-  shelf: 'none' // Not on a shelf until added
-  }
-
-  componentDidMount() {
-
-  }
-
-  change shelf on selection - check out add/remove contacts from contacts project for changing the books from shelf to shelf
-
-  */
