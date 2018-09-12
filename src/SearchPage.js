@@ -27,15 +27,20 @@ class SearchPage extends React.Component {
     if (query) {
       BooksAPI.search(query).then(searchResults => {
         {
-          /* if there's an error, doSomething! */
+          /* if there's an error, doSomething! // TODO: Thank you to Derick Gross for talking this through via mentor session */
         }
+        {/* If there's an error or nothing matches the search results */}
         if (searchResults.error) {
           this.setState({ searchResults: [] });
           console.log('No results');
         } else {
+          {/* If books match the search results, display the array*/}
           this.setState({ searchResults });
         }
       });
+    } else {
+      {/* Otherwise, clear the array and don't display any results */ }
+      this.setState({ searchResults: [] });
     }
   };
 
