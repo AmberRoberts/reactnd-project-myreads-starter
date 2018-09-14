@@ -4,29 +4,24 @@ import * as BooksAPI from "./BooksAPI";
 
 class Book extends Component {
 
-// Handling events reference here: https://reactjs.org/docs/handling-events.html
-
-// handles the bookshelf changer in selection menu
-// TODO: why won't it automatically refresh?
-
-ShelfChanger = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-        .then(() => BooksAPI.getAll())
-        .then(books => this.setState({ books }))
-  }
+// TODO:  Handling events reference here: https://reactjs.org/docs/handling-events.html
 
   render() {
+    // If there is a cover image, display it. If not, this prevents an error.
+    let cover = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : '';
+
+
     return (
       <div className="book">
         <div className="book-top">
           <div
             className="book-cover"
-            style={{ width: 128, height: 192, backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")` }}
+            style={{ width: 128, height: 192, backgroundImage: `url("${cover}")` }}
           />
           <div className="book-shelf-changer">
             <select
             onChange={(e) =>
-            this.ShelfChanger(this.props.book, e.target.value)
+            this.props.ShelfChanger(this.props.book, e.target.value)
             }
             value={this.props.book.shelf}
             >

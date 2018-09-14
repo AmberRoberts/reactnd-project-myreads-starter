@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import escapeRegExp from "escape-string-regexp";
 import Book from "./Book";
 import * as BooksAPI from "./BooksAPI";
+import BookCollection from "./BookCollection";
+import BookShelf from "./BookShelf"
 
 class SearchPage extends React.Component {
   // state for query in search field, set an array to hold search results
@@ -74,12 +76,28 @@ class SearchPage extends React.Component {
           <h2>You searched for: {this.state.query}</h2>
           <ol className="books-grid">
             {/* Filter BooksAPI to display books that match the search results from searchResults array */}
-            {searchResults.map(searchResults => (
-              <li key={searchResults.id}>
-                <Book book={searchResults}
-                 />
-              </li>
-            ))}
+
+            {
+              this.state.searchResults.map(searchResults => {
+              let shelf = "none";
+
+                this.props.books.map(book => (
+                  book.id === searchResults.id ? shelf=book.shelf : ""
+                ));
+
+
+              { /*TODO: Get the search page to show none*/}
+
+              return (
+            <li key={searchResults.id}>
+            <Book book={searchResults}
+            currentShelf={shelf}
+            ShelfChanger={this.props.ShelfChanger}
+            />
+            </li>
+          );
+        })
+      }
           </ol>
         </div>
       </div>
