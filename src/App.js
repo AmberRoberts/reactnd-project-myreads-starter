@@ -7,7 +7,7 @@ import BookCollection from "./BookCollection";
 import "./App.css";
 
 // TODO: README
-// TODO: Refresh on shelf change
+// TODO: Refresh on search page change
 // TODO: Search page isn't showing the right shelf on selection
 // TODO: reference: https://medium.freecodecamp.org/learn-react-js-in-5-minutes-526472d292f4
 
@@ -19,8 +19,8 @@ class BooksApp extends React.Component {
 
 // handles the bookshelf changer in selection menu
   ShelfChanger = (book, shelf) => {
-      BooksAPI.update(book, shelf)
-      .then(()=>BooksAPI.getAll())
+      BooksAPI.update(book, shelf);
+      BooksAPI.getAll()
       .then(books=> this.setState({ books }))
           console.log(`Book moved to ${shelf}`);
   };
