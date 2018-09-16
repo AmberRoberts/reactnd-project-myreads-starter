@@ -34,7 +34,7 @@ class BooksApp extends React.Component {
       }
   // call the update API
       BooksAPI.update(book, shelf);
-  // set the state to the newState we just created.
+  // set the state to the newState just created.
       this.setState({ newState });
       console.log(`${book.title} moved to ${shelf}`)
     };

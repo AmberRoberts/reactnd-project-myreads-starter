@@ -89,7 +89,7 @@ class SearchPage extends React.Component {
             {this.state.searchResults.map(searchResults => {
               let shelf = "none";
 
-              this.props.books.map(book => (
+              this.props.books.filter(book => (
                 book.id === searchResults.id ? shelf = book.shelf : ''
               ));
               console.log(searchResults)
