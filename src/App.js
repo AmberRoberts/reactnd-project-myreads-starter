@@ -6,45 +6,38 @@ import * as BooksAPI from "./BooksAPI";
 import BookCollection from "./BookCollection";
 import "./App.css";
 
-// TODO: README
-// TODO: Refresh on search page change
-// TODO: Search page isn't showing the right shelf on selection
-// TODO: reference: https://medium.freecodecamp.org/learn-react-js-in-5-minutes-526472d292f4
-
 class BooksApp extends React.Component {
   state = {
     books: []
   };
 
-
-// handles the bookshelf changer in selection menu
+  // handles the bookshelf changer in selection menu
   ShelfChanger = (book, shelf) => {
-  // get the index of the book in the state and assign it to a variable
-      const bookIndex = this.state.books.findIndex(
-        oldBook => oldBook.id === book.id
-      );
-  // create a newState variable
-      let newState;
-  // if the book is in the state
-      if (bookIndex !== -1) {
-  // assign the state object to the newState object variable
-        newState = Object.assign({}, this.state.books);
-  // update the shelf of that book in the newState
-        newState[bookIndex].shelf = shelf;
-      }
-  // call the update API
-      BooksAPI.update(book, shelf);
-  // set the state to the newState just created.
-      this.setState({ newState });
-      console.log(`${book.title} moved to ${shelf}`)
-    };
-
+    // get the index of the book in the state and assign it to a variable
+    const bookIndex = this.state.books.findIndex(
+      oldBook => oldBook.id === book.id
+    );
+    // create a newState variable
+    let newState;
+    // if the book is in the state
+    if (bookIndex !== -1) {
+      // assign the state object to the newState object variable
+      newState = Object.assign({}, this.state.books);
+      // update the shelf of that book in the newState
+      newState[bookIndex].shelf = shelf;
+    }
+    // call the update API
+    BooksAPI.update(book, shelf);
+    // set the state to the newState just created.
+    this.setState({ newState });
+    console.log(`${book.title} moved to ${shelf}`);
+  };
 
   // creates an API request when the component mounts
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
-      console.log(books)
+      console.log(books);
     });
   }
 
@@ -56,15 +49,24 @@ class BooksApp extends React.Component {
         <Route
           exact
           path="/"
-          render={() => <BookCollection books={this.state.books}
-          ShelfChanger={this.ShelfChanger}
-          />}
+          render={() => (
+            <BookCollection
+              books={this.state.books}
+              ShelfChanger={this.ShelfChanger}
+              shelf={this.currentShelf}
+            />
+          )}
         />
         {/* Or render the search page for /search */}
-        <Route path="/search" render={( {history }) => <SearchPage
-        books={this.state.books}
-        ShelfChanger={this.ShelfChanger}
-        />} />
+        <Route
+          path="/search"
+          render={({ history }) => (
+            <SearchPage
+              books={this.state.books}
+              ShelfChanger={this.ShelfChanger}
+            />
+          )}
+        />
       </div>
     );
   }

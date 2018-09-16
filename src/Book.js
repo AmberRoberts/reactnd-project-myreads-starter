@@ -3,27 +3,31 @@ import BookShelf from "./BookShelf.js";
 import * as BooksAPI from "./BooksAPI";
 
 class Book extends Component {
-
-// TODO:  Handling events reference here: https://reactjs.org/docs/handling-events.html
-
   render() {
     // If there is a cover image, display it. If not, this displays a placeholder and prevents an error.
-    let cover = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : '';
+    let cover = this.props.book.imageLinks
+      ? this.props.book.imageLinks.thumbnail
+      : "";
 
     return (
       <div className="book">
         <div className="book-top">
           <div
             className="book-cover"
-            style={{ width: 128, height: 192, backgroundImage: `url("${cover}")` }}
+            style={{
+              width: 128,
+              height: 192,
+              backgroundImage: `url("${cover}")`
+            }}
           />
           <div className="book-shelf-changer">
-            <select value={this.props.currentShelf}
-            onChange={(e) =>
-            this.props.ShelfChanger(this.props.book, e.target.value)
-            }
+            <select
+              onChange={e =>
+                this.props.ShelfChanger(this.props.book, e.target.value)
+              }
+              value={this.shelf === this.currentShelf ? this.props.defaultValue : "none"}
             >
-              <option value="move" default>
+              <option value="move" disabled>
                 Move to...
               </option>
               <option value="currentlyReading">Currently Reading</option>

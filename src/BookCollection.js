@@ -3,12 +3,9 @@ import BookShelf from "./BookShelf";
 import Book from "./Book";
 import { Link } from "react-router-dom";
 
-
-
 /* this component gives each bookshelf its individual info including shelf name, display info, and current books */
 
 class BookCollection extends Component {
-
   render() {
     return (
       <div className="list-books">
@@ -20,6 +17,7 @@ class BookCollection extends Component {
             <BookShelf
               shelfName="Currenly Reading"
               currentShelf="currentlyReading"
+              defaultValue="currentlyReading"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
             />
@@ -27,6 +25,7 @@ class BookCollection extends Component {
             <BookShelf
               shelfName="Want to Read"
               currentShelf="wantToRead"
+              defaultValue="wantToRead"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
             />
@@ -34,10 +33,10 @@ class BookCollection extends Component {
             <BookShelf
               shelfName="Read"
               currentShelf="read"
+              defaultValue="read"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
             />
-
           </div>
         </div>
         <div className="open-search">

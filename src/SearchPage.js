@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import escapeRegExp from "escape-string-regexp";
 import Book from "./Book";
 import * as BooksAPI from "./BooksAPI";
 import BookCollection from "./BookCollection";
-import BookShelf from "./BookShelf";
 
 class SearchPage extends React.Component {
   // state for query in search field, set an array to hold search results
@@ -21,36 +19,23 @@ class SearchPage extends React.Component {
   };
 
   // the query state uses the search method to fetch the books and create an array of search results
-  // TODO: add to README https://survivejs.com/webpack/appendices/searching-with-react/
-  // TODO: add to README https://reactjs.org/docs/conditional-rendering.html
-  // TODO: Get the search page to show none
 
-  // If there are search results, map. if no search results, say "no results"?
+  // If there are search results, map. if no search results, no results will show.
 
   searchResults = query => {
     if (query) {
       BooksAPI.search(query).then(searchResults => {
-        {
-          /* if there's an error, doSomething! // TODO: Thank you to Derick Gross for talking this through via mentor session */
-        }
-        {
-          /* If there's an error or nothing matches the search results */
-        }
+        /* If there's an error or nothing matches the search results */
         if (searchResults.error) {
           this.setState({ searchResults: [] });
           console.log("No results");
         } else {
-          {
-            /* If books match the search results, display the array*/
-          }
-          this.setState({ searchResults })
-         };
+          /* If books match the search results, display the array*/
+          this.setState({ searchResults });
         }
-);
+      });
     } else {
-      {
-        /* Otherwise, clear the array and don't display any results */
-      }
+      /* Otherwise, clear the array and don't display any results */
       this.setState({ searchResults: [] });
     }
   };
@@ -70,45 +55,35 @@ class SearchPage extends React.Component {
             You can find these search terms here:
             https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
 
-            However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-            you don't find a specific author or title. Every search is limited by search terms.
+            Every search is limited by search terms.
           */}
-            <input
-              type="text"
-              placeholder="Search by title or author"
-              value={query}
-              onChange={e => this.updateQuery(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="search-books-results">
-          <h2>Your search {query} contains {searchResults.length} books. </h2>
+          <input
+           type="text"
+           placeholder="Search by title or author"
+           value={query}
+           onChange={e => this.updateQuery(e.target.value)}
+         />
+       </div>
+     </div>
+     <div className="search-books-results">
+       <h2>Your search {query} contains {searchResults.length} books. </h2>
 
-          <ol className="books-grid">
-            {/* Filter BooksAPI to display books that match the search results from searchResults array */}
-            {this.state.searchResults.map(searchResults => {
-              let shelf = "none";
-
-              this.props.books.filter(book => (
-                book.id === searchResults.id ? shelf = book.shelf : ''
-              ));
-              console.log(searchResults)
-
-            return (
-                <li key={searchResults.id}>
-                  <Book
-                    book={searchResults}
-                    currentShelf={shelf}
-                    ShelfChanger={this.props.ShelfChanger}
-                  />
-                </li>
-              )
-            })}
-          </ol>
-        </div>
-      </div>
-    );
-  }
+       <ol className="books-grid">
+         {/* Map BooksAPI to display books that match the search results from searchResults array */}
+         {this.state.searchResults.map(searchResults => (
+             <li key={searchResults.id}>
+               <Book
+                 book={searchResults}
+                 ShelfChanger={this.props.ShelfChanger}
+               />
+             </li>
+           )
+         )}
+       </ol>
+     </div>
+   </div>
+ );
+}
 }
 
 export default SearchPage;
