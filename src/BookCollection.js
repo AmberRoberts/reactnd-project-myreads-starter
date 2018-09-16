@@ -16,15 +16,15 @@ class BookCollection extends Component {
           <div>
             <BookShelf
               shelfName="Currenly Reading"
-              currentShelf="currentlyReading"
-              defaultValue="currentlyReading"
+              shelf="currentlyReading"
+              defaultValue={this.shelf}
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
             />
 
             <BookShelf
               shelfName="Want to Read"
-              currentShelf="wantToRead"
+              shelf="wantToRead"
               defaultValue="wantToRead"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}
@@ -32,7 +32,7 @@ class BookCollection extends Component {
 
             <BookShelf
               shelfName="Read"
-              currentShelf="read"
+              shelf="read"
               defaultValue="read"
               books={this.props.books}
               ShelfChanger={this.props.ShelfChanger}

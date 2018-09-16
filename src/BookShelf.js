@@ -13,12 +13,11 @@ class BookShelf extends Component {
           <ol className="books-grid">
             {/* Filter to select books for this specific shelf, then map to create a new array to display here */}
             {this.props.books
-              .filter(book => book.shelf === this.props.currentShelf)
+              .filter(book => book.shelf === this.props.shelf)
               .map(book => (
                 <li key={book.id}>
                   <Book
                     book={book}
-                    currentShelf={this.currentShelf}
                     ShelfChanger={this.props.ShelfChanger}
                     defaultValue={book.shelf}
                   />

@@ -69,16 +69,25 @@ class SearchPage extends React.Component {
        <h2>Your search {query} contains {searchResults.length} books. </h2>
 
        <ol className="books-grid">
-         {/* Map BooksAPI to display books that match the search results from searchResults array */}
-         {this.state.searchResults.map(searchResults => (
+         {/* Filter BooksAPI to display books that match the search results from searchResults array */}
+         {this.state.searchResults.map(searchResults => {
+           let defaultValue = "none";
+
+           this.props.books.map(book => (
+             book.id === searchResults.id ? defaultValue = book.shelf : ''
+           ));
+           console.log({defaultValue})
+
+         return (
              <li key={searchResults.id}>
                <Book
                  book={searchResults}
+                 defaultValue={defaultValue}
                  ShelfChanger={this.props.ShelfChanger}
                />
              </li>
            )
-         )}
+         })}
        </ol>
      </div>
    </div>

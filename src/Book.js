@@ -25,7 +25,7 @@ class Book extends Component {
               onChange={e =>
                 this.props.ShelfChanger(this.props.book, e.target.value)
               }
-              value={this.shelf === this.currentShelf ? this.props.defaultValue : "none"}
+              value={this.props.defaultValue}
             >
               <option value="move" disabled>
                 Move to...

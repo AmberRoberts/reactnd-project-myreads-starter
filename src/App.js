@@ -53,7 +53,7 @@ class BooksApp extends React.Component {
             <BookCollection
               books={this.state.books}
               ShelfChanger={this.ShelfChanger}
-              shelf={this.currentShelf}
+              shelf={this.shelf}
             />
           )}
         />
