@@ -19,17 +19,32 @@ class BooksApp extends React.Component {
 
 // handles the bookshelf changer in selection menu
   ShelfChanger = (book, shelf) => {
+  // get the index of the book in the state and assign it to a variable
+      const bookIndex = this.state.books.findIndex(
+        oldBook => oldBook.id === book.id
+      );
+  // create a newState variable
+      let newState;
+  // if the book is in the state
+      if (bookIndex !== -1) {
+  // assign the state object to the newState object variable
+        newState = Object.assign({}, this.state.books);
+  // update the shelf of that book in the newState
+        newState[bookIndex].shelf = shelf;
+      }
+  // call the update API
       BooksAPI.update(book, shelf);
-      BooksAPI.getAll()
-      .then(books=> this.setState({ books }))
-          console.log(`Book moved to ${shelf}`);
-  };
+  // set the state to the newState we just created.
+      this.setState({ newState });
+      console.log(`${book.title} moved to ${shelf}`)
+    };
 
 
   // creates an API request when the component mounts
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
+      console.log(books)
     });
   }
 
@@ -46,10 +61,9 @@ class BooksApp extends React.Component {
           />}
         />
         {/* Or render the search page for /search */}
-        <Route path="/search" render={() => <SearchPage
+        <Route path="/search" render={( {history }) => <SearchPage
         books={this.state.books}
         ShelfChanger={this.ShelfChanger}
-
         />} />
       </div>
     );

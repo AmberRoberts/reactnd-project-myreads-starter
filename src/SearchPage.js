@@ -22,6 +22,8 @@ class SearchPage extends React.Component {
 
   // the query state uses the search method to fetch the books and create an array of search results
   // TODO: add to README https://survivejs.com/webpack/appendices/searching-with-react/
+  // TODO: add to README https://reactjs.org/docs/conditional-rendering.html
+  // TODO: Get the search page to show none
 
   // If there are search results, map. if no search results, say "no results"?
 
@@ -41,9 +43,10 @@ class SearchPage extends React.Component {
           {
             /* If books match the search results, display the array*/
           }
-          this.setState({ searchResults });
+          this.setState({ searchResults })
+         };
         }
-      });
+);
     } else {
       {
         /* Otherwise, clear the array and don't display any results */
@@ -79,30 +82,28 @@ class SearchPage extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          <h2>You searched for: {this.state.query}</h2>
+          <h2>Your search {query} contains {searchResults.length} books. </h2>
 
           <ol className="books-grid">
             {/* Filter BooksAPI to display books that match the search results from searchResults array */}
-            {this.state.searchResults.map(searchResults => (
-              <li key={searchResults.id}>
-                <Book
-                  book={searchResults}
-                  currentShelf={this.props.currentShelf}
-                  ShelfChanger={this.props.ShelfChanger}
-                />
-              </li>
-            ))}
+            {this.state.searchResults.map(searchResults => {
+              let shelf = "none";
 
-            {/*
-                  {
-                  let currentShelf = "none";
+              this.props.books.map(book => (
+                book.id === searchResults.id ? shelf = book.shelf : ''
+              ));
+              console.log(searchResults)
 
-                  this.props.books.map(book => (
-                  book.id === searchResults.id ? currentShelf=book.currentShelf : ""
-                ));
-              // TODO: Get the search page to show none
-              // TODO: add to README https://reactjs.org/docs/conditional-rendering.html
-              */}
+            return (
+                <li key={searchResults.id}>
+                  <Book
+                    book={searchResults}
+                    currentShelf={shelf}
+                    ShelfChanger={this.props.ShelfChanger}
+                  />
+                </li>
+              )
+            })}
           </ol>
         </div>
       </div>

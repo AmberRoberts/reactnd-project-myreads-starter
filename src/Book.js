@@ -7,9 +7,8 @@ class Book extends Component {
 // TODO:  Handling events reference here: https://reactjs.org/docs/handling-events.html
 
   render() {
-    // If there is a cover image, display it. If not, this prevents an error.
+    // If there is a cover image, display it. If not, this displays a placeholder and prevents an error.
     let cover = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : '';
-
 
     return (
       <div className="book">
@@ -19,13 +18,12 @@ class Book extends Component {
             style={{ width: 128, height: 192, backgroundImage: `url("${cover}")` }}
           />
           <div className="book-shelf-changer">
-            <select
+            <select value={this.props.currentShelf}
             onChange={(e) =>
             this.props.ShelfChanger(this.props.book, e.target.value)
             }
-            value={this.props.book.shelf}
             >
-              <option value="move" disabled>
+              <option value="move" default>
                 Move to...
               </option>
               <option value="currentlyReading">Currently Reading</option>
