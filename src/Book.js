@@ -7,7 +7,7 @@ class Book extends Component {
     // If there is a cover image, display it. If not, this displays a placeholder and prevents an error.
     let cover = this.props.book.imageLinks
       ? this.props.book.imageLinks.thumbnail
-      : "";
+      : `url("http://via.placeholder.com/128x193?text=No%20Cover")`;
 
     return (
       <div className="book">
@@ -38,7 +38,7 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{this.props.book.title}</div>
-        <div className="book-authors">{this.props.book.authors}</div>
+        <div className="book-authors">{this.props.book.authors ? this.props.book.authors.join(' & ') : ''}</div>
       </div>
     );
   }
